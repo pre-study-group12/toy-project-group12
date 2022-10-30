@@ -7,7 +7,6 @@
     <list default="true" id="0de6ab9e-871f-49be-8785-8b54b923f01f" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/border_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/border_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/text.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/text.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +47,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.nasller.CodeGlancePro"
+    "settings.editor.selected.configurable": "terminal"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -68,7 +67,7 @@
       <workItem from="1667032040874" duration="113000" />
       <workItem from="1667032167987" duration="13929000" />
       <workItem from="1667099061776" duration="6679000" />
-      <workItem from="1667106072424" duration="5076000" />
+      <workItem from="1667106072424" duration="7115000" />
     </task>
     <servers />
   </component>
