@@ -36,7 +36,27 @@ body {
 }
 
 .blank {
-    width: 60px;
+    width: 160px;
+}
+
+.button-wrap button:first-child {
+    margin: 5px;
+    padding: 3px 10px;
+    border: 1px solid black;
+    border-radius: 50px;
+    background-color: white;
+}
+
+.button-wrap button:first-child:hover {
+    margin: 5px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    background-color: black;
+    color: white;
+}
+
+.button-wrap a {
+    text-decoration: none;
 }
 
 .btn {

@@ -38,23 +38,30 @@
             <div class="logo-image">
                 <a href="#"><img src="../static/daily_fit_logo.jpg" alt="No Image"></a>
             </div>
-            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight"><i class="bi bi-list"></i></button>
+            <div class="button-wrap">
+                <a href="#">
+                    <button>새 글 작성</button>
+                </a>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRight"
+                        aria-controls="offcanvasRight"><i class="bi bi-list"></i></button>
 
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
-                 aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Daliy Fit</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <hr/>
-                <div class="offcanvas-body">
-                    <a href="#">사이트소개글</a>
-                    <a href="#">로그인</a>
-                    <a href="#">회원가입</a>
-                    <a href="#">게시판</a>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                     aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasRightLabel">Daliy Fit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <hr/>
+                    <div class="offcanvas-body">
+                        <a href="/">사이트소개글</a>
+                        <a href="#">로그인</a>
+                        <a href="#">회원가입</a>
+                        <a href="/list">게시판</a>
+                    </div>
                 </div>
             </div>
+
         </div>
 
         <div class="row row-cols-1 row-cols-md-5 g-4">
