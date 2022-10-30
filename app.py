@@ -13,6 +13,16 @@ def border_list():
     return render_template('border_list.html')
 
 
+@app.route('/posting/')
+def posting_page():
+    return render_template('posting_page.html')
+
+
+@app.route('/read/')
+def read_post():
+    return render_template('read_post.html')
+
+
 # @app.route("/list", methods=["GET"])
 # def border_list_get():
 #     return jsonify({'msg': 'GET 연결 완료!'})

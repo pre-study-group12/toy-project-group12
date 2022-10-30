@@ -7,9 +7,7 @@
     <list default="true" id="0de6ab9e-871f-49be-8785-8b54b923f01f" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/border_page_css.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/border_page_css.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/border_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/border_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_page.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +99,8 @@
       <workItem from="1667099061776" duration="6679000" />
       <workItem from="1667106072424" duration="10405000" />
       <workItem from="1667125838186" duration="1291000" />
-      <workItem from="1667127143344" duration="1788000" />
+      <workItem from="1667127143344" duration="3969000" />
+      <workItem from="1667132702050" duration="152000" />
     </task>
     <servers />
   </component>
@@ -120,6 +119,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/toy_project_group12$app.coverage" NAME="app 커버리지 결과" MODIFIED="1667127231051" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/toy_project_group12$app.coverage" NAME="app 커버리지 결과" MODIFIED="1667132788027" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
