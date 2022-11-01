@@ -11,6 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="../static/icon-img.png">
+
 
     <style>
         * {
@@ -48,7 +50,7 @@
             background-color: transparent;
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: right;
             align-items: center;
             margin: 20px;
         }
@@ -89,19 +91,21 @@
         .logo-image > img {
             width: 256px;
             height: 256px;
-            z-index: 100;
-            margin-left: 180px;
+            margin-top: -80px;
+
         }
 
         .middle {
             background-color: transparent;
             width: 50%;
-            height: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .middle > p {
             color: #13191c;
-            text-align: center;
             font-size: 30px;
             line-height: 100%;
         }
@@ -112,6 +116,10 @@
             display: flex;
             justify-content: space-between;
 
+        }
+
+        .footer img {
+            display: block;
         }
 
         .weather {
@@ -130,27 +138,48 @@
         }
 
         .sns {
+            background-color: transparent;
             width: 180px;
             display: flex;
             justify-content: space-between;
-            margin-right: 20px;
-        }
-
-        .footer img {
-            display: block;
+            align-items: center;
+            margin-right: 10px;
         }
 
         .half_highlight {
             background: -webkit-linear-gradient(bottom, #ffffbb 50%, transparent 50%);
             background: -o-linear-gradient(bottom, #ffffbb 50%, transparent 50%);
-            background: linear-gradient(to top, #ffffbb 50%, transparent 50%); /*맨 아래것만 사용해도 거진 다 됩니다*/
+            background: linear-gradient(to top, #ffffbb 50%, transparent 50%);
+        }
+
+        .city {
+            margin-top: 10px;
         }
     </style>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/weather/busan",
+                data: {},
+                success: function (response) {
+                    console.log(response)
+                    let temp = response['temp']
+                    let icon = response['icon']
+                    console.log(temp, icon)
+                    $('#icon').attr("src", icon);
+                    $('#temp').text(temp);
+                }
+            })
+        });
+        function hey() {
+            alert("준비중입니다.")
+        }
+    </script>
 </head>
 <body>
     <div class="toptop-warp">
         <div class="top-wrap">
-            <div class="logo-image"><img src="../static/daily_fit_logo.jpg" alt="No Image"></div>
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight"><i class="bi bi-list"></i></button>
 
@@ -172,17 +201,30 @@
             <source src="../static/exercise.mp4" type="video/mp4">
         </video>
         <div class="middle">
+            <a href="">
+                <div class="logo-image"><img src="../static/daily_fit_logo.jpg" alt="No Image"></div>
+            </a>
             <p><span class="half_highlight">Daily Fit Diary</span> 입니다.</p>
-            <p><span class="half_highlight">운동일지</span>를 작성하면서 운동해봐요 !</p>
+            <p><span class="half_highlight">운동일지</span>를 작성하고 운동해봐요 !</p>
             <p>오늘은 무슨 운동을 하셨나요?</p>
             <p><span class="half_highlight">꿀팁 공유</span>도 하고</p>
             <p>함께 근손실도 막아보아요 !</p>
         </div>
         <div class="footer">
             <div class="weather">
-                <a href="https://www.instagram.com/" target="_blank"><img
-                        src="https://www.weather.go.kr/w/iphone-shortcut.png" alt="" width="40px" height="40px"></a>
-                <p><a>온도 : 18도</a>, <a>미세먼지 : 안좋앙</a></p>
+                <a href="https://www.weather.go.kr/w/index.do" target="_blank">
+                    <div id="icon"><img src="http://openweathermap.org/img/w/01d.png" alt="" width="40px" height="40px">
+                    </div>
+                </a>
+                <form>
+                    <select onclick="hey()" class="city" name="city">
+                        <option value="1">서울</option>
+                        <option value="2" selected>부산</option>
+                        <option value="3">대전</option>
+                        <option value="4">광주</option>
+                    </select>
+                </form>
+                <p><a><span id="temp">00.0</span>도</a></p>
             </div>
             <div class="sns">
                 <a href="https://www.instagram.com/" target="_blank"><img src="../static/insta.png" width="30px"
