@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Daily Fit Diary | 게시물</title>
+    <link rel="shortcut icon" href="../static/favicon.ico"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+        <!-- ! Jquery-cookie-->
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+            integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    ></script>
+
+    <style>
+        * {
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+
+        .btn-primary {
+            padding: 0;
+        }
+
+        .toptop-wrap {
+            background-color: transparent;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .top-wrap {
+            background-color: transparent;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
+            height: 5vh;
+            margin-bottom: -32px;
+            z-index: 999;
+        }
+
+
+        .btn-primary {
+            color: black;
+            font-size: 32px;
+            background-color: transparent;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: lightskyblue;
+        }
+
+        .offcanvas {
+            width: 250px;
+        }
+
+        .offcanvas-title {
+            font-size: 32px;
+        }
+
+        .offcanvas-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .offcanvas-body > a {
+            text-decoration: none;
+            color: black;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        .logo-image {
+            display: flex;
+            justify-content: center;
+            margin-bottom: -20px;
+        }
+
+        .logo-image > a > img {
+            width: 256px;
+            height: 256px;
+            z-index: 1;
+
+        }
+
+        .blank {
+            width: 60px;
+        }
+
+        .middle > p {
+            color: #13191c;
+            font-size: 30px;
+            line-height: 150%;
+        }
+
+        .title > h1 > a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .row {
+            justify-content: center;
+        }
+
+
+        .form-control {
+            margin: 10px;
+            justify-items: flex-end;
+            justify-content: center;
+        }
+
+        .mypost {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 0 auto;
+            box-shadow: 0px 0px 3px 0px black;
+            padding: 30px;
+        }
+
+
+        .mypost > button {
+            margin-top: 10px;
+            margin-left: 180px;
+        }
+
+        .mycards {
+            width: 95%;
+            max-width: 500px;
+            margin: 5px auto 0 auto;
+        }
+
+        .container {
+            background-color: transparent;
+
+        }
+
+        .btn {
+            display: flex;
+            margin: 5px;
+            justify-content: right;
+        }
+        .login-check {
+            background-color: transparent;
+        }
+        .btn-logout {
+            font-size: 16px;
+            border-radius: 40px;
+            padding: 5px;
+            border-color: transparent;
+            margin-left: 15px;
+            z-index: -1000;
+        }
+        .btn-logout:hover {
+            border: 1px solid whitesmoke;
+            background-color: lightgray;
+        }
+    </style>
+
+    <!-- ! Jquery-cookie-->
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"
+            integrity="sha512-3j3VU6WC5rPQB4Ld1jnLV7Kd5xr+cq9avvhwqzbH/taCRNURoeEpoPBK9pDyeukwSxwRPJ8fDgvYXd6SkaZ2TA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    ></script>
+
+    <script>
+        $(document).ready(function () {
+            loadpost_get();
+            show_comment();
+        });
+
+        {#let token = $.cookie("mytoken");#}
+
+        let url = window.location.href
+        let post_num = url.split("=")[1]
+
+        let temp_html = ``
+
+        function loadpost_get() {
+            $.ajax({
+                type: "POST",
+                url: "/readpost/loadpost/",
+                data: {'num_give': post_num},
+                success: function (response) {
+                    let post_info = response['post_info']
+
+                    let postingContents = post_info["postingContents"];
+                    let postingNum = post_info["postingNum"];
+                    let postingSubject = post_info["postingSubject"];
+                    let uploadDay = post_info["uploadDay"];
+                    let uploadtime = post_info["uploadTime"];
+                    let userId = post_info["userId"];
+
+                    let split_y = uploadDay.split("/")[2]
+                    let split_m = uploadDay.split("/")[0]
+                    let split_d = uploadDay.split("/")[1]
+
+                    temp_html = `
+                                <thead>
+                                    <tr align="left">
+                                        <th>Daily fit [게시판]</th>
+                                        <th>${postingSubject}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>작성일
+                                        </td>
+                                        <td>
+                                            20${split_y}년 ${split_m}월 ${split_d}일 ${uploadtime}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            작성자
+                                        </td>
+                                        <td>
+                                            ${userId}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                    `
+
+                    $(".post-info").append(temp_html);
+
+                    temp_html = `
+                                <p>${postingContents}</p>
+                    `
+                    $(".post-body").append(temp_html);
+
+                },
+            });
+        }
+
+        function save_comment() {
+            if (!token) {
+                alert("로그인 후 댓글남기기가 가능합니다.")
+            } else {
+                let comment = $('#comment').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/readpost/savecommnet/",
+                    data: {'comment_give': comment, 'postnum_give': post_num},
+                    success: function (response) {
+                        alert(response["msg"])
+                        window.location.reload()
+                    }
+                });
+            }
+        }
+
+        function show_comment() {
+            $.ajax({
+                type: "POST",
+                url: "/readpost/showcommnet/",
+                data: {"postnum_give": post_num},
+                success: function (response) {
+                    let rows = response['comment']
+                    for (let i = 0; i < rows.length; i++) {
+                        let name = rows[i]['user_id']
+                        let comment = rows[i]['comment']
+
+                        temp_html = `<div class="card">
+                                            <div class="card-body">
+                                                <blockquote class="blockquote mb-0">
+                                                    <p>${comment}</p>
+                                                    <footer class="blockquote-footer">${name}</footer>
+                                                </blockquote>
+                                            </div>
+                                        </div>
+                    `
+                        $('#comment-list').append(temp_html)
+                    }
+                }
+            });
+        }
+
+        function postlist() {
+            window.location.href = "/postlist/"
+        }
+
+        function delete_post() {
+            $.ajax({
+                type: "POST",
+                url: "/deletepost/",
+                data: {"post_num": post_num},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.href = "/postlist/"
+                }
+            });
+        }
+
+        function check_login() {
+            let token = $.cookie("mytoken");
+            if (!token) {
+                document.getElementById('writepost-btn').style.display = "none"
+            }
+        }
+
+        //<!-- ! 토큰이 존재할 경우 ===> 1. 상단의 로그인바 생성, 2. 메뉴바의 로그인,회원가입 제거 -->
+        let token = $.cookie("mytoken");
+        if (token) {
+            // console.log("토큰이 존재합니다.");
+            console.log("token : ", token);
+            $.ajax({
+                type: "POST",
+                url: "/",
+                data: {},
+                success: function (response) {
+                    $("#user-id").text(response["user_info"]["user_id"]);
+                    $("#signin-element").css("visibility", "hidden");
+                    $("#signup-element").css("visibility", "hidden");
+                    $("#login-btn").css("visibility", "hidden")
+                    $("#login-bar").css("visibility", "visible");
+                },
+            });
+        }
+
+        function logout() {
+            $.removeCookie('mytoken', {path: '/'});
+            alert("로그아웃했습니다.");
+            window.location.href = '/';
+        }
+    </script>
+</head>
+<body>
+
+<div class="toptop-wrap">
+    <div class="top-wrap">
+        <div class="login-check">
+            <div id="login-bar" style="visibility: hidden">
+                <span id="user-id" style="color: #4b58f2; font-size: 24px">임시</span>로 로그인 되었습니다.
+                <span><button type="button" class="btn-logout" onclick="logout()">
+              로그아웃
+            </button></span>
+            </div>
+        </div>
+        <button
+                class="btn btn-primary"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasRight"
+                aria-controls="offcanvasRight"
+        >
+            <i class="bi bi-list"></i>
+        </button>
+
+        <div
+                class="offcanvas offcanvas-end"
+                tabindex="-1"
+                id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel"
+        >
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Daliy Fit</h5>
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="offcanvas"
+                        aria-label="Close"
+                ></button>
+            </div>
+            <div class="offcanvas-body">
+                <a href="/">사이트소개글</a>
+                <a href="/postlist/">게시판</a>
+{#                <a href="/signin/">로그인</a>#}
+{#                <a href="/signup/">회원가입</a>#}
+            </div>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="blank"></div>
+        <div class="logo-image">
+            <a href="#"
+            ><img src="../static/daily_fit_logo.jpg" alt="No Image"
+            /></a>
+        </div>
+    </div>
+
+    <div class="container">
+        <hr/>
+        <div class="row">
+            <div class="col-md-10">
+                <table class="table table-condensed post-info">
+
+                </table>
+
+                <div class="form-floating">
+                    <div class="card" style="...">
+                        <div class="card-body post-body">
+
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-condensed">
+                    <thead>
+                    <div class="btn">
+                        <input class="btn btn-secondary" type="button" onclick="postlist()" value="목록"/>
+                        <input class="btn btn-secondary" type="button" onclick="delete_post()" value="삭제"/>
+                    </div>
+                    <tr class="btn">
+                        <div class="mypost">
+                            <div class="form-floating">
+                      <textarea
+                              class="form-control"
+                              placeholder="Leave a comment here"
+                              id="comment"
+                              style="height: 100px"
+                      ></textarea>
+                                <label for="floatingTextarea2">댓글을 작성해주세요</label>
+                            </div>
+                            <button
+                                    onclick="save_comment()"
+                                    type="button"
+                                    class="btn btn-dark"
+                            >
+                                댓글 등록
+                            </button>
+                        </div>
+                        <div class="mycards" id="comment-list">
+
+                        </div>
+                    </tr>
+                </table>
+            </div>
+            <hr/>
+        </div>
+    </div>
+</div>
+</body>
+</html>
