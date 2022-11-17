@@ -9,7 +9,7 @@ import certifi
 # ? 맥 환경 DB 초기화 코드( certifi가 필요 )
 ca = certifi.where()
 client = MongoClient(
-    "mongodb+srv://test:sparta@cluster0.mapsk1p.mongodb.net/Cluster0?retryWrites=true&w=majority",
+    "몽고DB URL 입력이 필요합니다.",
     tlsCAFile=ca,
 )
 db = client.dailyfit
